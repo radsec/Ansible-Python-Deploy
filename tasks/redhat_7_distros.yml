@@ -17,14 +17,8 @@
     - not ansible_facts['distribution']|lower == 'centos'
     - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
 
-- name: "Ensure rhui-REGION-rhel-server-extras and -optional are enabled | Red Hat 7 or CentOS 7 Distros"
-  yum_repository:
-    name: "{{ repos }}"
-    enabled: yes
-  vars:
-    repos:
-      - rhui-REGION-rhel-server-extras
-      - rhui-REGION-rhel-server-optional
+- name: "Ensure rhui-REGION-rhel-server-extras and -optional are enabled | Red Hat 7 Distros"
+  shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras && yum-config-manager --enable rhui-REGION-rhel-server-optional"
   become: yes
   when:
     - not ansible_facts['distribution']|lower == 'centos'
@@ -57,7 +51,6 @@
     - python3-pip
     - python3-setuptools
     - python3-libs
-    - python:q
   register: python3
   ignore_errors: yes
   become: yes
@@ -95,7 +88,7 @@
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
     - "python37_virtualenv.rc != 0"
-    - "python34_virtualenv.rc != 0"
+    - "python36_virtualenv.rc != 0"
 
 # Python2
 - name: "Install Python 2 | Red Hat 7 or CentOS 7 Distros"

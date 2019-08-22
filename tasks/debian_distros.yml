@@ -8,7 +8,7 @@
 # Debian or Ubuntu Distros
 
 - name: "Update apt repo list | Debian or Ubuntu Distros"
-  shell: apt-get update
+  shell: "apt-get update"
   become: yes
 
 # Python3

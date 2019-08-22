@@ -18,13 +18,7 @@
     - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
 
 - name: "Ensure rhui-REGION-rhel-server-extras and -optional are enabled | Red Hat 6 Distros"
-  yum_repository:
-    name: "{{ repos }}"
-    enabled: yes
-  vars:
-    repos:
-      - rhui-REGION-rhel-server-extras
-      - rhui-REGION-rhel-server-optional
+  shell: "yum-config-manager --enable rhui-REGION-rhel-server-extras && yum-config-manager --enable rhui-REGION-rhel-server-optional"
   become: yes
   when:
     - not ansible_facts['distribution']|lower == 'centos'
