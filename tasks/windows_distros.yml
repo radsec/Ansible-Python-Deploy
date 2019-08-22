@@ -5,7 +5,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 ## END COPYRIGHT NOTICE ##
 
-# Windows OSes
+# Windows Server or Desktop Distros
 
 - name: "Determine if CMA/McAfee agent is installed - masvc"
   win_service:

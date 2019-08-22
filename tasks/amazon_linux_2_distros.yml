@@ -1,0 +1,42 @@
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+
+# Amazon Linux 2 Distro
+
+# Python3
+- name: "Install Python3 | Amazon Linux 2 Distro"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python3
+    - python3-pip
+    - python3-setuptools
+    - python3-libs
+  register: python3
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
+# Python2
+- name: "Install Python2 | Amazon Linux 2 Distro"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python
+    - python2-pip
+    - python2-setuptools
+    - python-libs
+  register: python2
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python2_only and not install_python3_only)

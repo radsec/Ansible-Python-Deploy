@@ -6,17 +6,34 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 ## END COPYRIGHT NOTICE ##
 
-- import_tasks: amazon_linux_distros.yml
+- import_tasks: amazon_linux_1_distros.yml
   when:
     - ansible_facts['distribution']|lower == 'amazon'
+    - ansible_facts['distribution_major_version'] == '2018' or ansible_facts['distribution_major_version'] == '2017' or ansible_facts['distribution_major_version'] == '2016' or ansible_facts['distribution_major_version'] == '2015' or ansible_facts['distribution_major_version'] == '2019' or ansible_facts['distribution_version'] == 'N/A' or ansible_facts['distribution_release'] == 'N/A'
+    - ansible_facts['pkg_mgr']|lower == 'yum'
+
+- import_tasks: amazon_linux_2_distros.yml
+  when:
+    - ansible_facts['distribution']|lower == 'amazon'
+    - not ansible_facts['distribution_version'] == 'N/A' or not ansible_facts['distribution_release'] == 'N/A' or ansible_fact['distribution_major_version'] == '2' or ansible_facts['distribution_major_version'] == '2'
+    - ansible_facts['pkg_mgr']|lower == 'yum'
 
 - import_tasks: debian_distros.yml
   when:
-    - ansible_facts['os_family']|lower == 'debian'
+    - ansible_facts['os_family']|lower == 'debian' or ansible_facts['distribution']|lower == 'ubuntu'
+    - ansible_facts['pkg_mgr']|lower == 'apt'
 
-- import_tasks: redhat_distros.yml
+- import_tasks: redhat_6_distros.yml
   when:
-    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'centos' or ansible_facts['distribution']|lower == 'red hat enterprise linux'
+    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'centos' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
+    - ansible_facts['pkg_mgr']|lower == 'yum'
+    - ansible_facts['distribution_major_version'] == '6'
+
+- import_tasks: redhat_7_distros.yml
+  when:
+    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'centos' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
+    - ansible_facts['pkg_mgr']|lower == 'yum'
+    - ansible_facts['distribution_major_version'] == '7'
 
 - import_tasks: windows_distros.yml
   when:

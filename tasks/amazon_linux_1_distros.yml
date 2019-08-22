@@ -1,0 +1,202 @@
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+
+# Linux OSes
+
+# Python3
+- name: "Install Python37 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python37
+    - python37-pip
+    - python37-setuptools
+    - python37-libs
+  register: python37
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
+- name: "Install Python36 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python36
+    - python36-pip
+    - python36-setuptools
+    - python36-libs
+  register: python36
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - not install_python3_only
+    - "python37.rc == 1"
+
+- name: "Install Python35 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python35
+    - python35-pip
+    - python35-setuptools
+    - python35-libs
+  register: python35
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - not install_python3_only
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+
+- name: "Install Python34 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python34
+    - python34-pip
+    - python34-setuptools
+    - python34-libs
+  register: python34
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - not install_python3_only
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+    - "python35.rc != 0"
+
+- name: "Install Python33 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python33
+    - python33-pip
+    - python33-setuptools
+    - python33-libs
+  register: python33
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+    - "python35.rc != 0"
+    - "python34.rc != 0"
+
+- name: "Install Python32 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python32
+    - python32-pip
+    - python32-setuptools
+    - python32-libs
+  register: python32
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+    - "python35.rc != 0"
+    - "python34.rc != 0"
+    - "python33.rc != 0"
+
+- name: "Install Python31 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python31
+    - python31-pip
+    - python31-setuptools
+    - python31-libs
+  register: python31
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+    - "python35.rc != 0"
+    - "python34.rc != 0"
+    - "python33.rc != 0"
+    - "python32.rc != 0"
+
+- name: "Install Python3 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python3
+    - python3-pip
+    - python3-setuptools
+    - python3-libs
+  register: python3
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37.rc != 0"
+    - "python36.rc != 0"
+    - "python35.rc != 0"
+    - "python34.rc != 0"
+    - "python33.rc != 0"
+    - "python32.rc != 0"
+    - "python31.rc != 0"
+
+# Python2
+- name: "Install Python27 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python27
+    - python27-pip
+    - python27-setuptools
+    - python27-libs
+  register: python27
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python2_only and not install_python3_only)
+
+- name: "Install Python26 | Amazon Linux 1"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python26
+    - python26-pip
+    - python26-setuptools
+    - python26-libs
+  register: python26
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or install_python2_only
+    - "python27.rc != 0"

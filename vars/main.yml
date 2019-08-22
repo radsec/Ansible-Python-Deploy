@@ -7,6 +7,6 @@
 ## END COPYRIGHT NOTICE ##
 # vars file for Ansible-Python-Deploy-Role
 
-auto_install_latest: yes
-install_python2_only: no
-install_python3_only: no
+auto_install_latest: true
+install_python2_only: false
+install_python3_only: false

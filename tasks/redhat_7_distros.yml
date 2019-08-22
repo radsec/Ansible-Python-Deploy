@@ -1,0 +1,81 @@
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+
+# Red Hat 7 or CentOS 7 Distros
+
+# Enable rh-amazon-rhui-client, enable rhui-REGION-rhel-server-extras|-optional, EPEL, and yum metadata clean
+- name: "Ensure rh-amazon-rhui-client is installed | Red Hat 7 Distros"
+  yum:
+    name: rh-amazon-rhui-client
+    state: latest
+  become: yes
+  when:
+    - not ansible_facts['distribution']|lower == 'centos'
+    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
+
+- name: "Ensure rhui-REGION-rhel-server-extras and -optional are enabled | Red Hat 7 or CentOS 7 Distros"
+  yum_repository:
+    name: "{{ repos }}"
+    enabled: yes
+  vars:
+    repos:
+      - rhui-REGION-rhel-server-extras
+      - rhui-REGION-rhel-server-optional
+  become: yes
+  when:
+    - not ansible_facts['distribution']|lower == 'centos'
+    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
+
+- name: "Enable epel repo | Red Hat 7 and CentOS 7 Distros"
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    file: external_repos
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgcheck: no
+    enabled: yes
+  become: yes
+
+- name: "yum-clean-metadata"
+  command: yum clean metadata
+  become: yes
+  args:
+    warn: no
+
+# Python3
+- name: "Install Python 3 | Red Hat 7 or CentOS 7 Distros"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python3
+    - python3-pip
+    - python3-setuptools
+    - python3-libs
+  register: python3
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
+# Python2
+- name: "Install Python 2 | Red Hat 7 or CentOS 7 Distros"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python
+    - python2-pip
+    - python-setuptools
+    - python-libs
+  register: python2
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python2_only and not install_python3_only)

@@ -5,26 +5,38 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 ## END COPYRIGHT NOTICE ##
 
-# Debian or Ubuntu Distros
-
-- name: "Update apt repo list | Debian or Ubuntu Distros"
-  shell: apt-get update
-  become: yes
+# Suse Distros
 
 # Python3
-- name: "Install Python3 | Debian or Ubuntu Distros"
-  shell: apt-get install python3 python3-pip
-  become: yes
-  ignore_errors: yes
+- name: "Install Python 3 | Red Hat 6 or CentOS 6 Distros"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python3
+    - python3-pip
+    - python3-setuptools
+    - python3-libs
   register: python3
+  ignore_errors: yes
+  become: yes
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
 
 # Python2
-- name: "Install Python2 | Debian or Ubuntu Distros"
-  shell: apt-get install python python-pip
-  become: yes
-  ignore_errors: yes
+- name: "Install Python 2 | Red Hat 6 or CentOS 6 Distros"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - python
+    - python2-pip
+    - python-setuptools
+    - python-libs
   register: python2
+  ignore_errors: yes
+  become: yes
   when:
     - auto_install_latest or (install_python2_only and not install_python3_only)
