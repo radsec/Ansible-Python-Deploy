@@ -7,9 +7,6 @@
 ## END COPYRIGHT NOTICE ##
 # vars file for Ansible-Python-Deploy-Role
 
-windows_dest: ""
-windows_url: ""
-linux_dest: ""
-linux_url: ""
-validate_certs: yes
-windows_product_id: ""
+auto_install_latest: yes
+install_python2_only: no
+install_python3_only: no

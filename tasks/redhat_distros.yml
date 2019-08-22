@@ -7,6 +7,8 @@
 
 # Linux OSes
 
+- name: "Install Python 2"
+
 - name: "Determine if CMA/McAfee agent is installed"
   service_facts:
   register: service_state
