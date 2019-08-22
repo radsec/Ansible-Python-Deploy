@@ -24,14 +24,14 @@
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
 
-- name: "Python 3 - virtualenv - pip --user | Amazon Linux 2 Distro"
+- name: "Install Python 3 - virtualenv via pip | --upgrade | Amazon Linux 2 Distro"
   shell: "pip3 install --upgrade virtualenv"
   become: yes
   ignore_errors: yes
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
 
-- name: "Python 3 - virtualenv - pip --user | Amazon Linux 2 Distro"
+- name: "Install Python 3 - virtualenv via pip | --upgrade --user | Amazon Linux 2 Distro"
   shell: "pip3 install --user --upgrade virtualenv"
   become: yes
   ignore_errors: yes
