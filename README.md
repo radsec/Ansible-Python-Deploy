@@ -1,5 +1,5 @@
 ## Ansible-Python-Deploy-Role
-Configures Python 2 or 3 and boto, boto3, and botocore for Amazon Linux 1, Amazon Linux 2, Red Hat Enterprise Linux 6-7, CentOS 6-7, Debian 7+, Ubuntu 14.04 LTS+, or Windows Server 2012 R2+.
+Configures Python 2 or 3 for Amazon Linux 1, Amazon Linux 2, Red Hat Enterprise Linux 6-7, CentOS 6-7, Debian 7+, Ubuntu 14.04 LTS+, or Windows Server 2012 R2+.
 
 
 ## System Requirements
