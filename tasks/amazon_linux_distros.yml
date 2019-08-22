@@ -1,0 +1,37 @@
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+
+# Linux OSes
+
+- name: "Determine if CMA/McAfee agent is installed"
+  service_facts:
+  register: service_state
+  become: yes
+
+- name: "Retrieve the CMA/McAfee agent from ePO server"
+  become: yes
+  get_url:
+    url: "{{ linux_url }}"
+    validate_certs: "{{ validate_certs }}"
+    dest: "{{ linux_dest }}"
+    mode: "0774"
+  when:
+    - ansible_facts.services["mcafee.ma.service"] is not defined
+
+- name: "Install the CMA/McAfee agent"
+  become: yes
+  shell: "{{ linux_dest }}"
+  when: 
+    - ansible_facts.services["mcafee.ma.service"] is not defined
+
+- name: "Remove the CMA/McAfee agent download"
+  become: yes
+  file:
+    path: "{{ linux_dest }}"
+    state: absent
+  when:
+    - ansible_facts.services["mcafee.ma.service"] is not defined

@@ -1,0 +1,24 @@
+---
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+
+- import_tasks: amazon_linux_distros.yml
+  when:
+    - ansible_facts['distribution']|lower == 'amazon'
+
+- import_tasks: debian_distros.yml
+  when:
+    - ansible_facts['os_family']|lower == 'debian'
+
+- import_tasks: redhat_distros.yml
+  when:
+    - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'centos' or ansible_facts['distribution']|lower == 'red hat enterprise linux'
+
+- import_tasks: windows_distros.yml
+  when:
+    - ansible_facts['os_family']|lower == 'windows' or (ansible_facts['distribution'] == "Windows") or (ansible_facts['os_family'] == "Windows")
+#END

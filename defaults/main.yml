@@ -1,0 +1,14 @@
+---
+## START COPYRIGHT NOTICE ##
+# Ansible-Python-Deploy-Role
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+## END COPYRIGHT NOTICE ##
+# defaults file for Ansible-Python-Deploy-Role
+
+# Define what sections to run
+
+auto_install_latest: yes
+install_python2_only: no
+install_python3_only: no
