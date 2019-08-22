@@ -57,11 +57,45 @@
     - python3-pip
     - python3-setuptools
     - python3-libs
+    - python:q
   register: python3
   ignore_errors: yes
   become: yes
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
+
+- name: "Install Python 3.7 - Virtualenv | Red Hat 7 or CentOS 7 Distros"
+  yum:
+    name: "python37-virtualenv"
+    state: latest
+  register: python37_virtualenv
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
+- name: "Install Python 3.6 - Virtualenv | Red Hat 7 or CentOS 7 Distros"
+  yum:
+    name: "python36-virtualenv"
+    state: latest
+  register: python36_virtualenv
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37_virtualenv.rc != 0"
+
+- name: "Install Python 3.4 - Virtualenv | Red Hat 7 or CentOS 7 Distros"
+  yum:
+    name: "python34-virtualenv"
+    state: latest
+  register: python34_virtualenv
+  ignore_errors: yes
+  become: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+    - "python37_virtualenv.rc != 0"
+    - "python34_virtualenv.rc != 0"
 
 # Python2
 - name: "Install Python 2 | Red Hat 7 or CentOS 7 Distros"

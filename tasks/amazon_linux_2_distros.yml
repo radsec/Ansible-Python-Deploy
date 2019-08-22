@@ -24,6 +24,20 @@
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
 
+- name: "Python 3 - virtualenv - pip --user | Amazon Linux 2 Distro"
+  shell: "pip3 install --upgrade virtualenv"
+  become: yes
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
+- name: "Python 3 - virtualenv - pip --user | Amazon Linux 2 Distro"
+  shell: "pip3 install --user --upgrade virtualenv"
+  become: yes
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (install_python3_only and not install_python2_only)
+
 # Python2
 - name: "Install Python2 | Amazon Linux 2 Distro"
   yum:
@@ -35,6 +49,7 @@
     - python2-pip
     - python2-setuptools
     - python-libs
+    - python-virtualenv
   register: python2
   ignore_errors: yes
   become: yes

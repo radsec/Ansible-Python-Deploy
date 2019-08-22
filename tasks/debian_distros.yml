@@ -13,7 +13,7 @@
 
 # Python3
 - name: "Install Python3 | Debian or Ubuntu Distros"
-  shell: apt-get install python3 python3-pip
+  shell: "apt-get install -y python3 python3-pip python3-virtualenv"
   become: yes
   ignore_errors: yes
   register: python3
@@ -22,7 +22,7 @@
 
 # Python2
 - name: "Install Python2 | Debian or Ubuntu Distros"
-  shell: apt-get install python python-pip
+  shell: "apt-get install -y python python-pip python-virtualenv"
   become: yes
   ignore_errors: yes
   register: python2

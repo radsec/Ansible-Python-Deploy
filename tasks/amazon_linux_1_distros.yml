@@ -18,6 +18,7 @@
     - python37-pip
     - python37-setuptools
     - python37-libs
+    - python37-virtualenv
   register: python37
   ignore_errors: yes
   become: yes
@@ -34,6 +35,7 @@
     - python36-pip
     - python36-setuptools
     - python36-libs
+    - python36-virtualenv
   register: python36
   ignore_errors: yes
   become: yes
@@ -52,6 +54,7 @@
     - python35-pip
     - python35-setuptools
     - python35-libs
+    - python35-virtualenv
   register: python35
   ignore_errors: yes
   become: yes
@@ -71,6 +74,7 @@
     - python34-pip
     - python34-setuptools
     - python34-libs
+    - python34-virtualenv
   register: python34
   ignore_errors: yes
   become: yes
@@ -91,6 +95,7 @@
     - python33-pip
     - python33-setuptools
     - python33-libs
+    - python33-virtualenv
   register: python33
   ignore_errors: yes
   become: yes
@@ -111,6 +116,7 @@
     - python32-pip
     - python32-setuptools
     - python32-libs
+    - python32-virtualenv
   register: python32
   ignore_errors: yes
   become: yes
@@ -132,6 +138,7 @@
     - python31-pip
     - python31-setuptools
     - python31-libs
+    - python31-virtualenv
   register: python31
   ignore_errors: yes
   become: yes
@@ -154,6 +161,7 @@
     - python3-pip
     - python3-setuptools
     - python3-libs
+    - python3-virtualenv
   register: python3
   ignore_errors: yes
   become: yes
@@ -178,6 +186,7 @@
     - python27-pip
     - python27-setuptools
     - python27-libs
+    - python27-virtualenv
   register: python27
   ignore_errors: yes
   become: yes
@@ -194,6 +203,7 @@
     - python26-pip
     - python26-setuptools
     - python26-libs
+    - python26-virtualenv
   register: python26
   ignore_errors: yes
   become: yes
