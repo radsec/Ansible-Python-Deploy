@@ -30,7 +30,7 @@
     - not ansible_facts['distribution']|lower == 'centos'
     - ansible_facts['os_family']|lower == 'redhat' or ansible_facts['distribution']|lower == 'red hat enterprise linux' or ansible_facts['distribution']|lower == 'red hat'
 
-- name: "Enable epel repo | Red Hat 7 and CentOS 7 Distros"
+- name: "Enable epel repo | Red Hat 7 or CentOS 7 Distros"
   yum_repository:
     name: epel
     description: EPEL YUM repo

@@ -5,10 +5,10 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 ## END COPYRIGHT NOTICE ##
 
-# Linux OSes
+# Amazon Linux 1 Distro
 
 # Python3
-- name: "Install Python37 | Amazon Linux 1"
+- name: "Install Python37 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -24,7 +24,7 @@
   when:
     - auto_install_latest or (install_python3_only and not install_python2_only)
 
-- name: "Install Python36 | Amazon Linux 1"
+- name: "Install Python36 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -42,7 +42,7 @@
     - not install_python3_only
     - "python37.rc == 1"
 
-- name: "Install Python35 | Amazon Linux 1"
+- name: "Install Python35 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -61,7 +61,7 @@
     - "python37.rc != 0"
     - "python36.rc != 0"
 
-- name: "Install Python34 | Amazon Linux 1"
+- name: "Install Python34 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -81,7 +81,7 @@
     - "python36.rc != 0"
     - "python35.rc != 0"
 
-- name: "Install Python33 | Amazon Linux 1"
+- name: "Install Python33 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -101,7 +101,7 @@
     - "python35.rc != 0"
     - "python34.rc != 0"
 
-- name: "Install Python32 | Amazon Linux 1"
+- name: "Install Python32 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -122,7 +122,7 @@
     - "python34.rc != 0"
     - "python33.rc != 0"
 
-- name: "Install Python31 | Amazon Linux 1"
+- name: "Install Python31 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -144,7 +144,7 @@
     - "python33.rc != 0"
     - "python32.rc != 0"
 
-- name: "Install Python3 | Amazon Linux 1"
+- name: "Install Python3 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -168,7 +168,7 @@
     - "python31.rc != 0"
 
 # Python2
-- name: "Install Python27 | Amazon Linux 1"
+- name: "Install Python27 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
@@ -184,7 +184,7 @@
   when:
     - auto_install_latest or (install_python2_only and not install_python3_only)
 
-- name: "Install Python26 | Amazon Linux 1"
+- name: "Install Python26 | Amazon Linux 1 Distro"
   yum:
     name: "{{ packages }}"
     state: latest
