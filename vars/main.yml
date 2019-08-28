@@ -7,6 +7,14 @@
 ## END COPYRIGHT NOTICE ##
 # vars file for Ansible-Python-Deploy-Role
 
+# All OS Vars
 auto_install_latest: true
 install_python2_only: false
 install_python3_only: false
+validate_certs: yes
+# Windows Vars
+windows_install_python2_only: false
+windows_install_python3_only: true
+windows_python3_url: ""
+windows_python2_url: ""
+windows_product_id: ""

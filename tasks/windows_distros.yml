@@ -6,3 +6,67 @@
 ## END COPYRIGHT NOTICE ##
 
 # Windows Server or Desktop Distros
+
+- name: "Install Python 3 - Path Check | Windows"
+  win_package:
+    path: "{{ windows_python3_url }}"
+    validate_certs: "{{ validate_certs }}"
+    state: present
+    creates_path: C:\Program Files\Python37
+    arguments:
+      - /quiet
+      - InstallAllUsers=1
+      - PrependPath=1
+      - Include_test=0
+      - AssociateFiles=1
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (windows_install_python3_only and not windows_install_python2_only)
+    - windows_path_check
+
+- name: "Install Python 3 - ProductID Check | Windows"
+  win_package:
+    path: "{{ windows_python3_url }}"
+    validate_certs: "{{ validate_certs }}"
+    state: present
+    product_id: "{{ windows_product_id }}"
+    arguments:
+      - /quiet
+      - InstallAllUsers=1
+      - PrependPath=1
+      - Include_test=0
+      - AssociateFiles=1
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (windows_install_python3_only and not windows_install_python2_only)
+    - not windows_path_check
+    - windows_product_id is defined
+
+- name: "Install Python 2 - Path Check | Windows"
+  win_package:
+    path: "{{ windows_python2_url }}"
+    validate_certs: "{{ validate_certs }}"
+    state: present
+    creates_path: C:\Program Files\Python27
+    arguments:
+      - ADDLOCAL=ALL
+      - ALLUSERS=1
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (windows_install_python2_only and not windows_install_python3_only)
+    - windows_path_check
+
+- name: "Install Python 2 - ProductID Check | Windows"
+  win_package:
+    path: "{{ windows_python2_url }}"
+    validate_certs: "{{ validate_certs }}"
+    state: present
+    product_id: "{{ windows_product_id }}"
+    arguments:
+      - ADDLOCAL=ALL
+      - ALLUSERS=1
+  ignore_errors: yes
+  when:
+    - auto_install_latest or (windows_install_python2_only and not windows_install_python3_only)
+    - not windows_path_check
+    - windows_product_id is defined
